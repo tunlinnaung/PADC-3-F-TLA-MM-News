@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 26
     defaultConfig {
-        applicationId "xyz.tunlinaung.padc_3_f_tla_mm_news"
+        applicationId "xyz.tunlinaung.news"
         minSdkVersion 21
         targetSdkVersion 26
         versionCode 1

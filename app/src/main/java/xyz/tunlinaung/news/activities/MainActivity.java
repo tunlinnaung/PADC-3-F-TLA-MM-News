@@ -1,4 +1,4 @@
-package xyz.tunlinaung.padc_3_f_tla_mm_news;
+package xyz.tunlinaung.news.activities;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -8,6 +8,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import xyz.tunlinaung.news.R;
 
 public class MainActivity extends AppCompatActivity {
 
