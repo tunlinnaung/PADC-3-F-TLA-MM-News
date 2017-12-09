@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -14,6 +15,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import xyz.tunlinaung.news.R;
+import xyz.tunlinaung.news.adapters.NewsAdapter;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
 
     @BindView(R.id.fab) FloatingActionButton fab;
 
+    private NewsAdapter mNewsAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +35,13 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this,this);
 
         setSupportActionBar(toolbar);
+
+        mNewsAdapter = new NewsAdapter();
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext(),
+                LinearLayoutManager.VERTICAL, false);
+        rvNews.setLayoutManager(linearLayoutManager);
+        rvNews.setAdapter(mNewsAdapter);
     }
 
     @Override
