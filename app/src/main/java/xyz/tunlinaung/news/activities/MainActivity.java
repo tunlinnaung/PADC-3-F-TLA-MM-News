@@ -38,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
 
         mNewsAdapter = new NewsAdapter();
 
+        // TODO use GridLayoutManager to show 2 columns
+
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext(),
                 LinearLayoutManager.VERTICAL, false);
         rvNews.setLayoutManager(linearLayoutManager);
