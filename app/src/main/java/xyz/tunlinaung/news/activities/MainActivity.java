@@ -17,8 +17,9 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import xyz.tunlinaung.news.R;
 import xyz.tunlinaung.news.adapters.NewsAdapter;
+import xyz.tunlinaung.news.delegates.NewsActionDelegate;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements NewsActionDelegate {
 
     @BindView(R.id.rv_news) RecyclerView rvNews;
 
@@ -37,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
         setSupportActionBar(toolbar);
 
-        mNewsAdapter = new NewsAdapter();
+        mNewsAdapter = new NewsAdapter(this);
 
         // TODO use GridLayoutManager to show 2 columns
 
@@ -75,4 +76,24 @@ public class MainActivity extends AppCompatActivity {
                 .setAction("Action", null).show();
     }
 
+    @Override
+    public void onTapNewsItem() {
+        Intent intent = NewsDetailsActivity.newIntent(this.getApplicationContext());
+        startActivity(intent);
+    }
+
+    @Override
+    public void onTapCommentButton() {
+
+    }
+
+    @Override
+    public void onTapSendToButton() {
+
+    }
+
+    @Override
+    public void onTapFavouriteButton() {
+
+    }
 }

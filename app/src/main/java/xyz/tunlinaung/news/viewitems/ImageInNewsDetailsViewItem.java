@@ -1,4 +1,4 @@
-package viewitems;
+package xyz.tunlinaung.news.viewitems;
 
 import android.content.Context;
 import android.support.annotation.NonNull;

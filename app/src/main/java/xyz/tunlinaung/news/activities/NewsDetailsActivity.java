@@ -26,6 +26,8 @@ public class NewsDetailsActivity extends AppCompatActivity {
 
     private ImagesInNewsDetailsAdapter mImagesInNewsDetailsAdapter;
 
+    // first parameter is context that currently activity.
+    // second parameter is class that intent want to communicate.
     public static Intent newIntent(Context context) {
         Intent intent = new Intent(context, NewsDetailsActivity.class);
         return intent;
@@ -41,11 +43,20 @@ public class NewsDetailsActivity extends AppCompatActivity {
 
         //setSupportActionBar(toolbar);
 
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //getSupportActionBar().setDisplayShowHomeEnabled(true);
+
         // hide toolbar's title
         //getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         mImagesInNewsDetailsAdapter = new ImagesInNewsDetailsAdapter();
         viewPager.setAdapter(mImagesInNewsDetailsAdapter);
 
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 }

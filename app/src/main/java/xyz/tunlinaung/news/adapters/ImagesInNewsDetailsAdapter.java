@@ -6,7 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import viewitems.ImageInNewsDetailsViewItem;
+import xyz.tunlinaung.news.viewitems.ImageInNewsDetailsViewItem;
 import xyz.tunlinaung.news.R;
 
 /**
