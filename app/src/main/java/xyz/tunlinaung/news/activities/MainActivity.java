@@ -17,6 +17,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import xyz.tunlinaung.news.R;
 import xyz.tunlinaung.news.adapters.NewsAdapter;
+import xyz.tunlinaung.news.data.models.NewsModel;
 import xyz.tunlinaung.news.delegates.NewsActionDelegate;
 
 public class MainActivity extends AppCompatActivity implements NewsActionDelegate {
@@ -46,6 +47,8 @@ public class MainActivity extends AppCompatActivity implements NewsActionDelegat
                 LinearLayoutManager.VERTICAL, false);
         rvNews.setLayoutManager(linearLayoutManager);
         rvNews.setAdapter(mNewsAdapter);
+
+        NewsModel.getObjInstance().loadNews();
     }
 
     @Override

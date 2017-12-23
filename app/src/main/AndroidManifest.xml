@@ -29,4 +29,7 @@
 
     </application>
 
+    <!-- access network granted. -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
 </manifest>
