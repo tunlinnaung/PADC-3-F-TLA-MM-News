@@ -1,13 +1,18 @@
 package xyz.tunlinaung.news.data.vo;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Created by eidoshack on 12/17/17.
  */
 
 public class ActedUserVO {
 
+    @SerializedName("user-id")
     private String userId;
+    @SerializedName("user-name")
     private String userName;
+    @SerializedName("profile-image")
     private String profileImage;
 
     public String getUserId() {

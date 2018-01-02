@@ -6,7 +6,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import xyz.tunlinaung.news.R;
+import xyz.tunlinaung.news.data.vo.NewsVO;
 import xyz.tunlinaung.news.delegates.NewsActionDelegate;
 import xyz.tunlinaung.news.viewholders.ItemNewsViewHolder;
 
@@ -17,9 +21,11 @@ import xyz.tunlinaung.news.viewholders.ItemNewsViewHolder;
 public class NewsAdapter extends RecyclerView.Adapter<ItemNewsViewHolder> {
 
     private NewsActionDelegate newsActionDelegate;
+    private List<NewsVO> mNewsList;
 
     public NewsAdapter(NewsActionDelegate newsActionDelegate) {
         this.newsActionDelegate = newsActionDelegate;
+        mNewsList = new ArrayList<>();
     }
 
     @Override
@@ -36,12 +42,17 @@ public class NewsAdapter extends RecyclerView.Adapter<ItemNewsViewHolder> {
     @Override
     public void onBindViewHolder(ItemNewsViewHolder holder, int position)
     {
-
+        holder.setNews(mNewsList.get(position));
     }
 
     @Override
     public int getItemCount()
     {
-        return 16;
+        return mNewsList.size();
+    }
+
+    public void setNews(List<NewsVO> newsList) {
+        mNewsList = newsList;
+        notifyDataSetChanged(); // call this method whenever data change at collection list.
     }
 }

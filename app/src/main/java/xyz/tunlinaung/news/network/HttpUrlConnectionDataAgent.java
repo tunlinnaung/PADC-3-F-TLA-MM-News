@@ -3,8 +3,11 @@ package xyz.tunlinaung.news.network;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.google.gson.Gson;
+
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
+import org.greenrobot.eventbus.EventBus;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -20,6 +23,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import xyz.tunlinaung.news.MMNewsApp;
+import xyz.tunlinaung.news.events.LoadedNewsEvent;
+import xyz.tunlinaung.news.network.responses.GetNewsResponse;
 
 /**
  * Created by eidoshack on 12/23/17.
@@ -105,6 +110,14 @@ public class HttpUrlConnectionDataAgent implements NewsDataAgent {
 
                     String responseString = stringBuilder.toString(); //9.
                     Log.d(MMNewsApp.LOG_TAG, "doInBackground: responseString -> " + responseString);
+
+                    Gson gson = new Gson();
+                    GetNewsResponse getNewsResponse = gson.fromJson(responseString, GetNewsResponse.class);
+                    Log.d(MMNewsApp.LOG_TAG, "doInBackground: " + getNewsResponse.getMmNews().size());
+
+                    EventBus.getDefault().post(new LoadedNewsEvent(getNewsResponse.getMmNews()));
+
+
                 } catch (Exception e) {
                     Log.d(MMNewsApp.LOG_TAG, "doInBackground: error -> " + e.getMessage());
                     /*

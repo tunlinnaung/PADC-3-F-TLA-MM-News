@@ -1,5 +1,7 @@
 package xyz.tunlinaung.news.data.vo;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
 /**
@@ -8,27 +10,26 @@ import java.util.List;
 
 public class NewsVO {
 
+    @SerializedName("news-id")
     private String newsId;
-    private String breif;
+    private String brief;
     private String details;
     private List<String> images;
+    @SerializedName("posted-date")
     private String postedDate;
-    private PublicationVO publications;
+    private PublicationVO publication;
     private List<FavoriteVO> favorites;
     private List<CommentVO> comments;
+    @SerializedName("sent-tos")
     private List<SendToVO> sendTos;
 
     public String getNewsId() {
         return newsId;
     }
 
-    public String getBreif() {
-        return breif;
-    }
+    public String getBrief() { return brief; }
 
-    public String getDetails() {
-        return details;
-    }
+    public String getDetails() { return details; }
 
     public List<String> getImages() {
         return images;
@@ -38,13 +39,9 @@ public class NewsVO {
         return postedDate;
     }
 
-    public PublicationVO getPublications() {
-        return publications;
-    }
+    public PublicationVO getPublication() { return publication; }
 
-    public List<FavoriteVO> getFavorites() {
-        return favorites;
-    }
+    public List<FavoriteVO> getFavorites() { return favorites; }
 
     public List<CommentVO> getComments() {
         return comments;
