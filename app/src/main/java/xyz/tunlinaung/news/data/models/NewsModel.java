@@ -2,6 +2,8 @@ package xyz.tunlinaung.news.data.models;
 
 import xyz.tunlinaung.news.network.HttpUrlConnectionDataAgent;
 import xyz.tunlinaung.news.network.NewsDataAgent;
+import xyz.tunlinaung.news.network.OkHttpDataAgent;
+import xyz.tunlinaung.news.network.RetrofitDataAgent;
 
 /**
  * Created by eidoshack on 12/23/17.
@@ -14,7 +16,9 @@ public class NewsModel {
     private NewsDataAgent mNewsDataAgent;
 
     private NewsModel() {
-        mNewsDataAgent = HttpUrlConnectionDataAgent.getObjInstance();
+//        mNewsDataAgent = HttpUrlConnectionDataAgent.getObjInstance();     // with HttpURLDataAgent
+//        mNewsDataAgent = OkHttpDataAgent.getInstance();
+        mNewsDataAgent = RetrofitDataAgent.getInstance();
     }
 
     public static NewsModel getObjInstance()

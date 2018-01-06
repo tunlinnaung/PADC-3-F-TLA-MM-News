@@ -52,9 +52,9 @@ public class HttpUrlConnectionDataAgent implements NewsDataAgent {
     {
         Log.d(MMNewsApp.LOG_TAG, "loadNews: log in main thread.");
 
-        // 1st param -> doInBackground's parameter
-        // 2nd param -> progress count
-        // 3rd param -> return value type
+        // 1st param -> doInBackground() method's parameter
+        // 2nd param -> progress count (mostly integer)
+        // 3rd param -> doInBackground() method's return value type
         new AsyncTask<Void, Void, Void>() {
 
             @Override
