@@ -27,7 +27,14 @@ public class OkHttpDataAgent implements NewsDataAgent {
 
     private static OkHttpDataAgent sObjInstance;
 
+    private static OkHttpClient mHttpClient;
+
     private OkHttpDataAgent() {
+        mHttpClient = new OkHttpClient.Builder() //1.
+                .connectTimeout(60, TimeUnit.SECONDS)
+                .writeTimeout(15, TimeUnit.SECONDS)
+                .readTimeout(60, TimeUnit.SECONDS)
+                .build();
     }
 
     public static OkHttpDataAgent getInstance()
@@ -61,11 +68,7 @@ public class OkHttpDataAgent implements NewsDataAgent {
             // connectionTimeout - 15
             // writeTimeout - 15
             // readTimeout - 60
-            OkHttpClient httpClient = new OkHttpClient.Builder() //1.
-                    .connectTimeout(60, TimeUnit.SECONDS)
-                    .writeTimeout(15, TimeUnit.SECONDS)
-                    .readTimeout(60, TimeUnit.SECONDS)
-                    .build();
+
 
             RequestBody formBody = new FormBody.Builder() //2.
                     .add("access_token", "b002c7e1a528b7cb460933fc2875e916")
@@ -79,7 +82,7 @@ public class OkHttpDataAgent implements NewsDataAgent {
 
             String responseString = null;
             try {
-                Response response = httpClient.newCall(request).execute(); //4.
+                Response response = mHttpClient.newCall(request).execute(); //4.
                 if (response.isSuccessful() && response.body() != null) {
                     responseString = response.body().string();
                     return responseString;

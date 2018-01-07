@@ -23,21 +23,9 @@ import xyz.tunlinaung.news.network.responses.GetNewsResponse;
 public class RetrofitDataAgent implements NewsDataAgent {
 
     private static RetrofitDataAgent sObjInstance;
+    private NewsApi mNewsApi;
 
-    private RetrofitDataAgent() {
-    }
-
-    public static RetrofitDataAgent getInstance()
-    {
-        if (sObjInstance == null) {
-            sObjInstance = new RetrofitDataAgent();
-        }
-
-        return sObjInstance;
-    }
-
-    @Override
-    public void loadNews()
+    private RetrofitDataAgent()
     {
         OkHttpClient httpClient = new OkHttpClient.Builder()
                 .connectTimeout(60, TimeUnit.SECONDS)
@@ -52,8 +40,22 @@ public class RetrofitDataAgent implements NewsDataAgent {
                 .client(httpClient)
                 .build();
 
-        NewsApi newsApi = retrofit.create(NewsApi.class);
-        Call<GetNewsResponse> getNewsResponseCall = newsApi.getNews("b002c7e1a528b7cb460933fc2875e916", 1);
+        mNewsApi = retrofit.create(NewsApi.class);
+    }
+
+    public static RetrofitDataAgent getInstance()
+    {
+        if (sObjInstance == null) {
+            sObjInstance = new RetrofitDataAgent();
+        }
+
+        return sObjInstance;
+    }
+
+    @Override
+    public void loadNews()
+    {
+        Call<GetNewsResponse> getNewsResponseCall = mNewsApi.getNews("b002c7e1a528b7cb460933fc2875e916", 1);
 
         getNewsResponseCall.enqueue(new Callback<GetNewsResponse>() {
             @Override
