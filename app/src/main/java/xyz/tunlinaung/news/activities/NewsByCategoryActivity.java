@@ -19,6 +19,8 @@ import xyz.tunlinaung.news.R;
 import xyz.tunlinaung.news.adapters.NewsByCategoryAdapter;
 import xyz.tunlinaung.news.events.LoadedNewsEvent;
 import xyz.tunlinaung.news.fragments.NewsByCategoryFragment;
+import xyz.tunlinaung.news.fragments.NewsByInternaltionalFragment;
+import xyz.tunlinaung.news.fragments.NewsBySportFragment;
 
 /**
  * Created by eidoshack on 1/7/18.
@@ -58,10 +60,12 @@ public class NewsByCategoryActivity extends AppCompatActivity {
         vpNewsByCategory.setAdapter(mNewsByCategoryAdapter);
 
         mNewsByCategoryAdapter.addTap("Local News", new NewsByCategoryFragment());
-        mNewsByCategoryAdapter.addTap("International News", new NewsByCategoryFragment());
-        mNewsByCategoryAdapter.addTap("Sport News", new NewsByCategoryFragment());
+        mNewsByCategoryAdapter.addTap("International News", new NewsByInternaltionalFragment());
+        mNewsByCategoryAdapter.addTap("Sport News", new NewsBySportFragment());
 
         tbNewsByCategory.setupWithViewPager(vpNewsByCategory);
+
+        vpNewsByCategory.setOffscreenPageLimit(mNewsByCategoryAdapter.getCount());
 
     }
 
