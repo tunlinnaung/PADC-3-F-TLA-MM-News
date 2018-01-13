@@ -24,6 +24,7 @@ import xyz.tunlinaung.news.MMNewsApp;
 import xyz.tunlinaung.news.R;
 import xyz.tunlinaung.news.adapters.NewsAdapter;
 import xyz.tunlinaung.news.data.models.NewsModel;
+import xyz.tunlinaung.news.data.vo.NewsVO;
 import xyz.tunlinaung.news.delegates.NewsActionDelegate;
 import xyz.tunlinaung.news.events.LoadedNewsEvent;
 import xyz.tunlinaung.news.network.NewsDataAgent;
@@ -100,8 +101,9 @@ public class MainActivity extends AppCompatActivity implements NewsActionDelegat
     }
 
     @Override
-    public void onTapNewsItem() {
+    public void onTapNewsItem(NewsVO tappedNew) {
         Intent intent = NewsDetailsActivity.newIntent(this.getApplicationContext());
+        intent.putExtra("news_id", tappedNew.getNewsId());
         startActivity(intent);
     }
 

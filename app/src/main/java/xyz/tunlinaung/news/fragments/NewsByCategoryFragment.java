@@ -1,5 +1,6 @@
 package xyz.tunlinaung.news.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -19,8 +20,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import xyz.tunlinaung.news.MMNewsApp;
 import xyz.tunlinaung.news.R;
+import xyz.tunlinaung.news.activities.NewsDetailsActivity;
 import xyz.tunlinaung.news.adapters.NewsAdapter;
 import xyz.tunlinaung.news.data.models.NewsModel;
+import xyz.tunlinaung.news.data.vo.NewsVO;
 import xyz.tunlinaung.news.delegates.NewsActionDelegate;
 import xyz.tunlinaung.news.events.LoadedNewsEvent;
 
@@ -67,8 +70,10 @@ public class NewsByCategoryFragment extends Fragment implements NewsActionDelega
     }
 
     @Override
-    public void onTapNewsItem() {
-
+    public void onTapNewsItem(NewsVO tappedNew) {
+        Intent intent = NewsDetailsActivity.newIntent(this.getContext());
+        intent.putExtra("news_id", tappedNew.getNewsId());
+        startActivity(intent);
     }
 
     @Override

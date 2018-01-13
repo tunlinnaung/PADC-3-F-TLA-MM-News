@@ -24,6 +24,8 @@ public class ItemNewsViewHolder extends RecyclerView.ViewHolder {
 
     private NewsActionDelegate newsActionDelegate;
 
+    private NewsVO mNew;
+
     @BindView(R.id.tv_publication_title)
     TextView tvPublicationTitle;
 
@@ -46,6 +48,7 @@ public class ItemNewsViewHolder extends RecyclerView.ViewHolder {
         ButterKnife.bind(this, itemView);
 
         this.newsActionDelegate = newsActionDelegate;
+        this.mNew = new NewsVO();
     }
 
 
@@ -53,11 +56,13 @@ public class ItemNewsViewHolder extends RecyclerView.ViewHolder {
     @OnClick(R.id.cv_news_item_root)
     public void onNewsItemTap(View itemView)
     {
-        newsActionDelegate.onTapNewsItem();
+        newsActionDelegate.onTapNewsItem(mNew);
 
     }
 
     public void setNews(NewsVO newsVO) {
+        mNew = newsVO;
+
         this.tvPublicationTitle.setText(newsVO.getPublication().getTitle());
         this.tvPostedDate.setText(newsVO.getPostedDate());
         this.tvNewsBreif.setText(newsVO.getBrief());

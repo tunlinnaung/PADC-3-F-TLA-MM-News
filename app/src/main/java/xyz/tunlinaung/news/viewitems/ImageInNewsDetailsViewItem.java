@@ -5,6 +5,13 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
+
+import com.bumptech.glide.Glide;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import xyz.tunlinaung.news.R;
 
 /**
  * Created by eidoshack on 12/10/17.
@@ -12,6 +19,8 @@ import android.widget.FrameLayout;
 
 public class ImageInNewsDetailsViewItem extends FrameLayout {
 
+    @BindView(R.id.iv_news_details_image)
+    ImageView ivNewsDetailsImage;
 
     public ImageInNewsDetailsViewItem(@NonNull Context context) {
         super(context);
@@ -25,4 +34,17 @@ public class ImageInNewsDetailsViewItem extends FrameLayout {
         super(context, attrs, defStyleAttr);
     }
 
+    // Bind data while inflate
+    @Override
+    protected void onFinishInflate() {
+        super.onFinishInflate();
+
+        ButterKnife.bind(this, this);
+    }
+
+    public void setData(String imageUrl) {
+        Glide.with(ivNewsDetailsImage.getContext())
+                .load(imageUrl)
+                .into(ivNewsDetailsImage);
+    }
 }
