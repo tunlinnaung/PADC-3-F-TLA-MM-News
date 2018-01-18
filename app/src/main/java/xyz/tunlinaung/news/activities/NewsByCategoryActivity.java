@@ -1,13 +1,20 @@
 package xyz.tunlinaung.news.activities;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -34,7 +41,16 @@ public class NewsByCategoryActivity extends AppCompatActivity {
 
     @BindView(R.id.tb_news_by_category) TabLayout tbNewsByCategory;
 
+    @BindView(R.id.navigation_view) NavigationView navigationView;
+
+    @BindView(R.id.drawer_layout) DrawerLayout drawerLayout;
+
     private NewsByCategoryAdapter mNewsByCategoryAdapter;
+
+    public static Intent newIntent(Context context) {
+        Intent intent = new Intent(context, NewsByCategoryActivity.class);
+        return intent;
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState)
@@ -67,6 +83,37 @@ public class NewsByCategoryActivity extends AppCompatActivity {
 
         vpNewsByCategory.setOffscreenPageLimit(mNewsByCategoryAdapter.getCount());
 
+        navigationView.getMenu().findItem(R.id.menu_news_by_categories).setChecked(true);
+
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                if (item.getItemId() == R.id.menu_all_news) {
+                    Intent intent = MainActivity.newIntent(getApplicationContext());
+                    startActivity(intent);
+                } else if (item.getItemId() == R.id.menu_news_by_categories) {
+                    Intent intent = NewsByCategoryActivity.newIntent(getApplicationContext());
+                    startActivity(intent);
+                }
+
+                // to close drawer layout from left menu
+                drawerLayout.closeDrawer(GravityCompat.START);
+
+                return true;
+            }
+        });
+
     }
 
+    // screen back button to be working.
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed();
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 }

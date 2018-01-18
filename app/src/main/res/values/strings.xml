@@ -17,4 +17,15 @@
 ဒါပေမယ့်လည်း ယခုနှစ်ယှဉ်ပြိုင်သွားခဲ့တဲ့ ဥရောပ ချန်ပီယံ အုပ်စုတွင်း ပြိုင်ပွဲများတွင် ပြင်သစ်ကလပ် ပီအက်ဂျီအသင်းက စုစုပေါင်း သွင်းဂိုး ၂၅ ဂိုးအထိ သွင်းယူနိုင်ခဲဲ့လို့ အုပ်စုတွင်း သွင်းဂိုးအများဆုံး အသင်းအဖြစ် စံချိန်တင်နိုင်ခဲ့ပြီ ဖြစ်ပါတယ်။
     </string>
     <string name="title_news_by_category">News By Category</string>
+    <string name="menu_item_all_news">All News</string>
+    <string name="menu_item_news_by_categories">News By Category</string>
+    <string name="screen_title_all_news">All News</string>
+    <string name="main_content_header_title">\'Historic low\' / World\'s confidence in US leadership has collapsed under Trump,poll finds</string>
+    <string name="main_content_description">Gallup poll shows approval for something else if it is a good solution for Trmump has fallen to 30%, down from 48% under Obama</string>
+    <string name="sub_content_title_1">US-Mexico border / Donal Trump contradits aide john Keylly on all</string>
+    <string name="sub_content_title_2">Donald Trump / Backlash as president reveals \'Fake News Awards\' winners</string>
+    <string name="child_content_1">\'This happens all the time\' / Why a gay couple take their wedding cake case to the supreme court</string>
+    <string name="child_content_2">March for Life / Trump to give anti-abortion event a rare presidential tuhumbs up</string>
+    <string name="child_content_3">The boss, the boyfriend and the FBI / The Italian woman in the eye of the Trump-Russia inquiry</string>
+    <string name="child_content_4">Amazon / Company shortlists 20 metro areas for second headquarters</string>
 </resources>

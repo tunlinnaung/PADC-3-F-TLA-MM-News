@@ -23,6 +23,8 @@
         android:textSize="16dp"
         android:textColor="@color/primary_text"
         android:lineSpacingMultiplier="1.3"
+        android:maxLines="2"
+        android:ellipsize="end"
         />
 
     <TextView
