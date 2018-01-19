@@ -20,12 +20,15 @@
     <string name="menu_item_all_news">All News</string>
     <string name="menu_item_news_by_categories">News By Category</string>
     <string name="screen_title_all_news">All News</string>
-    <string name="main_content_header_title">\'Historic low\' / World\'s confidence in US leadership has collapsed under Trump,poll finds</string>
+    <string name="main_content_header_title"><font color="#FF0000">\'Historic low\' / </font>World\'s confidence in US leadership has collapsed under Trump,poll finds</string>
     <string name="main_content_description">Gallup poll shows approval for something else if it is a good solution for Trmump has fallen to 30%, down from 48% under Obama</string>
-    <string name="sub_content_title_1">US-Mexico border / Donal Trump contradits aide john Keylly on all</string>
-    <string name="sub_content_title_2">Donald Trump / Backlash as president reveals \'Fake News Awards\' winners</string>
-    <string name="child_content_1">\'This happens all the time\' / Why a gay couple take their wedding cake case to the supreme court</string>
-    <string name="child_content_2">March for Life / Trump to give anti-abortion event a rare presidential tuhumbs up</string>
-    <string name="child_content_3">The boss, the boyfriend and the FBI / The Italian woman in the eye of the Trump-Russia inquiry</string>
-    <string name="child_content_4">Amazon / Company shortlists 20 metro areas for second headquarters</string>
+    <string name="sub_content_title_1"><font color="#FF0000">US-Mexico border / </font>Donal Trump contradits aide john Keylly on all</string>
+    <string name="sub_content_title_2"><font color="#FF0000">Donald Trump / </font>Backlash as president reveals \'Fake News Awards\' winners</string>
+    <string name="child_content_1"><font color="#FF0000">\'This happens all the time\' / </font>Why a gay couple take their wedding cake case to the supreme court</string>
+    <string name="child_content_2"><font color="#FF0000">March for Life / </font>Trump to give anti-abortion event a rare presidential tuhumbs up</string>
+    <string name="child_content_3"><font color="#FF0000">The boss, the boyfriend and the FBI / </font>The Italian woman in the eye of the Trump-Russia inquiry</string>
+    <string name="child_content_4"><font color="#FF0000">Amazon / </font>Company shortlists 20 metro areas for second headquarters</string>
+    <string name="headlines_title">Headlines</string>
+    <string name="news_time">09:40 PM</string>
+    <string name="main_content_child_title"><font color="#FF0000">Soccer / </font>Global perceptions of US could hit 2026 World Cup bid</string>
 </resources>
