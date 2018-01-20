@@ -52,6 +52,11 @@ public class OkHttpDataAgent implements NewsDataAgent {
         new LoadNewsTask().execute("http://padcmyanmar.com/padc-3/mm-news/apis/v1/getMMNews.php");
     }
 
+    @Override
+    public void loginUser(String email, String password) {
+
+    }
+
     // 2. to overcome memory leak while calling background thread
     // make *static*
     // 1st parameter - different endpoints

@@ -30,11 +30,12 @@ import xyz.tunlinaung.news.R;
 import xyz.tunlinaung.news.adapters.NewsAdapter;
 import xyz.tunlinaung.news.data.models.NewsModel;
 import xyz.tunlinaung.news.data.vo.NewsVO;
+import xyz.tunlinaung.news.delegates.BeforeLoginDelegate;
 import xyz.tunlinaung.news.delegates.NewsActionDelegate;
 import xyz.tunlinaung.news.events.LoadedNewsEvent;
-import xyz.tunlinaung.news.network.NewsDataAgent;
+import xyz.tunlinaung.news.viewpods.BeforeLoginViewPod;
 
-public class MainActivity extends AppCompatActivity implements NewsActionDelegate {
+public class MainActivity extends AppCompatActivity implements NewsActionDelegate, BeforeLoginDelegate {
 
     @BindView(R.id.rv_news) RecyclerView rvNews;
 
@@ -47,6 +48,8 @@ public class MainActivity extends AppCompatActivity implements NewsActionDelegat
     @BindView(R.id.navigation_view) NavigationView mNavigationView;
 
     private NewsAdapter mNewsAdapter;
+
+    BeforeLoginViewPod vpBeforeLogin;
 
     public static Intent newIntent(Context context) {
         Intent intent = new Intent(context, MainActivity.class);
@@ -81,8 +84,6 @@ public class MainActivity extends AppCompatActivity implements NewsActionDelegat
         rvNews.setLayoutManager(linearLayoutManager);
         rvNews.setAdapter(mNewsAdapter);
 
-        NewsModel.getObjInstance().loadNews();
-
         mNavigationView.getMenu().findItem(R.id.menu_all_news).setChecked(true);
 
         mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -102,6 +103,12 @@ public class MainActivity extends AppCompatActivity implements NewsActionDelegat
                 return true;
             }
         });
+
+        // get header layout from navigation view.
+        vpBeforeLogin = (BeforeLoginViewPod) mNavigationView.getHeaderView(0);
+        vpBeforeLogin.setDelegate(this);
+
+        NewsModel.getObjInstance().loadNews();
     }
 
     @Override
@@ -172,5 +179,17 @@ public class MainActivity extends AppCompatActivity implements NewsActionDelegat
     public void onNewsLoaded(LoadedNewsEvent event) {
         Log.d(MMNewsApp.LOG_TAG, "onNewsLoaded: " + event.getNewsList().size());
         mNewsAdapter.setNews(event.getNewsList());
+    }
+
+    @Override
+    public void onTapToLogin() {
+        Intent intent = AccountControlActivity.newIntentLogin(getApplicationContext());
+        startActivity(intent);
+    }
+
+    @Override
+    public void onTapToRegister() {
+        Intent intent = AccountControlActivity.newIntentRegister(getApplicationContext());
+        startActivity(intent);
     }
 }
