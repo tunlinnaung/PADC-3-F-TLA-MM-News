@@ -28,14 +28,17 @@ import butterknife.OnClick;
 import xyz.tunlinaung.news.MMNewsApp;
 import xyz.tunlinaung.news.R;
 import xyz.tunlinaung.news.adapters.NewsAdapter;
+import xyz.tunlinaung.news.data.models.LoginUserModel;
 import xyz.tunlinaung.news.data.models.NewsModel;
 import xyz.tunlinaung.news.data.vo.NewsVO;
 import xyz.tunlinaung.news.delegates.BeforeLoginDelegate;
+import xyz.tunlinaung.news.delegates.LoginUserDelegate;
 import xyz.tunlinaung.news.delegates.NewsActionDelegate;
 import xyz.tunlinaung.news.events.LoadedNewsEvent;
+import xyz.tunlinaung.news.viewpods.AccountControlViewPod;
 import xyz.tunlinaung.news.viewpods.BeforeLoginViewPod;
 
-public class MainActivity extends AppCompatActivity implements NewsActionDelegate, BeforeLoginDelegate {
+public class MainActivity extends AppCompatActivity implements NewsActionDelegate, BeforeLoginDelegate, LoginUserDelegate {
 
     @BindView(R.id.rv_news) RecyclerView rvNews;
 
@@ -49,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements NewsActionDelegat
 
     private NewsAdapter mNewsAdapter;
 
-    BeforeLoginViewPod vpBeforeLogin;
+    AccountControlViewPod vpAccountControl;
 
     public static Intent newIntent(Context context) {
         Intent intent = new Intent(context, MainActivity.class);
@@ -105,8 +108,9 @@ public class MainActivity extends AppCompatActivity implements NewsActionDelegat
         });
 
         // get header layout from navigation view.
-        vpBeforeLogin = (BeforeLoginViewPod) mNavigationView.getHeaderView(0);
-        vpBeforeLogin.setDelegate(this);
+        vpAccountControl = (AccountControlViewPod) mNavigationView.getHeaderView(0);
+        vpAccountControl.setDelegate((BeforeLoginDelegate) this);
+        vpAccountControl.setDelegate((LoginUserDelegate) this);
 
         NewsModel.getObjInstance().loadNews();
     }
@@ -191,5 +195,10 @@ public class MainActivity extends AppCompatActivity implements NewsActionDelegat
     public void onTapToRegister() {
         Intent intent = AccountControlActivity.newIntentRegister(getApplicationContext());
         startActivity(intent);
+    }
+
+    @Override
+    public void onTapLogout() {
+        LoginUserModel.getInstance().logout();
     }
 }

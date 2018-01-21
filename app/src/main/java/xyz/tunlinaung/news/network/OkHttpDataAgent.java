@@ -57,6 +57,11 @@ public class OkHttpDataAgent implements NewsDataAgent {
 
     }
 
+    @Override
+    public void registerUser(String phoneNo, String password, String name) {
+
+    }
+
     // 2. to overcome memory leak while calling background thread
     // make *static*
     // 1st parameter - different endpoints

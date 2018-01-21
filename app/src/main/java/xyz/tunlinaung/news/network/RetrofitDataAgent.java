@@ -4,7 +4,6 @@ import com.google.gson.Gson;
 
 import org.greenrobot.eventbus.EventBus;
 
-import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
@@ -14,7 +13,9 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import xyz.tunlinaung.news.events.LoadedNewsEvent;
+import xyz.tunlinaung.news.events.SuccessLoginEvent;
 import xyz.tunlinaung.news.network.responses.GetNewsResponse;
+import xyz.tunlinaung.news.network.responses.LoginResponse;
 
 /**
  * Created by eidoshack on 1/6/18.
@@ -77,8 +78,53 @@ public class RetrofitDataAgent implements NewsDataAgent {
     }
 
     @Override
-    public void loginUser(String email, String password) {
-        // TODO
+    public void loginUser(String phoneNo, String password)
+    {
+        Call<LoginResponse> loginCall = mNewsApi.loginUser(phoneNo, password);
+
+        // capture the response
+        loginCall.enqueue(new Callback<LoginResponse>() {
+            @Override
+            public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response)
+            {
+                LoginResponse loginResponse = response.body();
+
+                if (loginResponse != null) {
+                    SuccessLoginEvent event = new SuccessLoginEvent(loginResponse.getLoginUser());
+                    EventBus.getDefault()   // event object
+                            .post(event);   // post method
+                }
+            }
+
+            @Override
+            public void onFailure(Call<LoginResponse> call, Throwable t)
+            {
+            }
+        });
+    }
+
+    @Override
+    public void registerUser(String phoneNo, String password, String name)
+    {
+        Call<LoginResponse> getRegisterUserResponseCall = mNewsApi.registerUser(phoneNo, password, name);
+
+        getRegisterUserResponseCall.enqueue(new Callback<LoginResponse>() {
+            @Override
+            public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response)
+            {
+                LoginResponse getRegisterUserResponse = response.body();
+
+                if (getRegisterUserResponse != null) {
+                    EventBus.getDefault()  // event object
+                            .post(getRegisterUserResponse.getLoginUser()); // post method
+                }
+            }
+
+            @Override
+            public void onFailure(Call<LoginResponse> call, Throwable t)
+            {
+            }
+        });
     }
 
 }

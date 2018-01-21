@@ -46,4 +46,15 @@
         android:textColor="@color/white_full"
         />
 
+    <Button
+        android:id="@+id/btn_logout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/lbl_logout"
+        style="@style/accent_button"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="@dimen/margin_medium_2"
+        />
+
 </xyz.tunlinaung.news.viewpods.LoginUserViewPod>

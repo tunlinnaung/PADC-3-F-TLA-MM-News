@@ -42,5 +42,6 @@
     <string name="hint_enter_password">Password</string>
     <string name="lbl_navigate_to_login"><u><i>Already have account ?</i></u></string>
     <string name="lbl_mark_my_home_on_google_map"><u><i>Mark my home on Google Map</i></u></string>
+    <string name="lbl_logout">Logout</string>
 
 </resources>
