@@ -14,6 +14,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import xyz.tunlinaung.news.R;
 import xyz.tunlinaung.news.data.models.LoginUserModel;
+import xyz.tunlinaung.news.data.vo.LoginUserVO;
 import xyz.tunlinaung.news.delegates.BeforeLoginDelegate;
 import xyz.tunlinaung.news.delegates.LoginUserDelegate;
 import xyz.tunlinaung.news.events.SuccessLoginEvent;
@@ -76,9 +77,13 @@ public class AccountControlViewPod extends FrameLayout {
     }
 
     public void refreshUserSession() {
-        if (LoginUserModel.getInstance().isUserLogin()) {
+        if (LoginUserModel.getInstance(getContext()).isUserLogin()) {
             vpBeforeLogin.setVisibility(GONE);
             vpLoginUser.setVisibility(VISIBLE);
+
+            LoginUserVO loginUserVO = LoginUserModel.getInstance(getContext()).getLoginUser();
+            if (loginUserVO != null)
+                vpLoginUser.bindData(loginUserVO);
         }
         else
         {

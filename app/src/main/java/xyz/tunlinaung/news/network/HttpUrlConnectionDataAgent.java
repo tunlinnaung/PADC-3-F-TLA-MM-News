@@ -1,5 +1,6 @@
 package xyz.tunlinaung.news.network;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -143,7 +144,7 @@ public class HttpUrlConnectionDataAgent implements NewsDataAgent {
     }
 
     @Override
-    public void loginUser(String phoneNo, String password) {
+    public void loginUser(Context context, String phoneNo, String password) {
 
     }
 

@@ -1,5 +1,7 @@
 package xyz.tunlinaung.news.network;
 
+import android.content.Context;
+
 /**
  * Created by eidoshack on 12/23/17.
  */
@@ -13,10 +15,11 @@ public interface NewsDataAgent {
 
     /**
      * login user
+     * @param context
      * @param phoneNo
      * @param password
      */
-    void loginUser(String phoneNo, String password);
+    void loginUser(Context context, String phoneNo, String password);
 
     /**
      * register user

@@ -199,6 +199,6 @@ public class MainActivity extends AppCompatActivity implements NewsActionDelegat
 
     @Override
     public void onTapLogout() {
-        LoginUserModel.getInstance().logout();
+        LoginUserModel.getInstance(getApplicationContext()).logout();
     }
 }

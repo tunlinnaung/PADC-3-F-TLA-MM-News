@@ -1,5 +1,6 @@
 package xyz.tunlinaung.news.network;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -53,7 +54,7 @@ public class OkHttpDataAgent implements NewsDataAgent {
     }
 
     @Override
-    public void loginUser(String email, String password) {
+    public void loginUser(Context context, String email, String password) {
 
     }
 

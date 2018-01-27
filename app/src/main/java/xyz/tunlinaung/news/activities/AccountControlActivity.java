@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import butterknife.ButterKnife;
 import xyz.tunlinaung.news.R;
+import xyz.tunlinaung.news.delegates.LoginScreenDelegate;
 import xyz.tunlinaung.news.fragments.LoginFragment;
 import xyz.tunlinaung.news.fragments.RegisterFragment;
 
@@ -16,7 +17,7 @@ import xyz.tunlinaung.news.fragments.RegisterFragment;
  * Created by eidoshack on 1/20/18.
  */
 
-public class AccountControlActivity extends AppCompatActivity {
+public class AccountControlActivity extends AppCompatActivity implements LoginScreenDelegate {
 
     public static final String IE_SCREEN_TYPE    = "IE_SCREEN_TYPE";
     public static final int SCREEN_TYPE_LOGIN    = 1;
@@ -24,20 +25,23 @@ public class AccountControlActivity extends AppCompatActivity {
 
     Fragment fragment;
 
-    public static Intent newIntentLogin(Context context) {
+    public static Intent newIntentLogin(Context context)
+    {
         Intent intent = new Intent(context, AccountControlActivity.class);
         intent.putExtra(IE_SCREEN_TYPE, SCREEN_TYPE_LOGIN);
         return intent;
     }
 
-    public static Intent newIntentRegister(Context context) {
+    public static Intent newIntentRegister(Context context)
+    {
         Intent intent = new Intent(context, AccountControlActivity.class);
         intent.putExtra(IE_SCREEN_TYPE, SCREEN_TYPE_REGISTER);
         return intent;
     }
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_control);
 
@@ -50,6 +54,17 @@ public class AccountControlActivity extends AppCompatActivity {
             fragment = new RegisterFragment();
         }
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.fl_container, fragment).commit();
+        getSupportFragmentManager().beginTransaction()
+                                   .replace(R.id.fl_container, fragment)
+                                   .commit();
+    }
+
+    @Override
+    public void onTapToRegister() {
+        getSupportFragmentManager().beginTransaction()
+                                   .setCustomAnimations(R.anim.enter, R.anim.exit, R.anim.pop_enter, R.anim.pop_exit)
+                                   .replace(R.id.fl_container, new RegisterFragment())
+                                   .addToBackStack("ToRegister")
+                                   .commit();
     }
 }

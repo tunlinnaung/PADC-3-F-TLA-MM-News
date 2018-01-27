@@ -1,5 +1,6 @@
 package xyz.tunlinaung.news.fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -18,6 +19,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import xyz.tunlinaung.news.R;
 import xyz.tunlinaung.news.data.models.LoginUserModel;
+import xyz.tunlinaung.news.delegates.LoginScreenDelegate;
 import xyz.tunlinaung.news.events.SuccessLoginEvent;
 
 /**
@@ -29,6 +31,18 @@ public class LoginFragment extends Fragment {
     @BindView(R.id.et_email_or_phone) EditText etEmailOrPhone;
 
     @BindView(R.id.et_password) EditText etPassword;
+
+    private LoginScreenDelegate mLoginScreenDelegate;
+
+    /**
+     * pass delegate from host activity to fragment
+     * @param context
+     */
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mLoginScreenDelegate = (LoginScreenDelegate) context;
+    }
 
     @Nullable
     @Override
@@ -60,7 +74,12 @@ public class LoginFragment extends Fragment {
         String phoneNo = etEmailOrPhone.getText().toString();
         String password = etPassword.getText().toString();
 
-        LoginUserModel.getInstance().loginUser(phoneNo, password);
+        LoginUserModel.getInstance(getContext()).loginUser(getContext(), phoneNo, password);
+    }
+
+    @OnClick(R.id.btn_to_register)
+    public void onTapRegister(View view) {
+        mLoginScreenDelegate.onTapToRegister();
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
