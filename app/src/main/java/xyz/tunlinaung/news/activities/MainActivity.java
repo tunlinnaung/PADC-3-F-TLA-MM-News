@@ -1,14 +1,21 @@
 package xyz.tunlinaung.news.activities;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ShareCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -17,6 +24,8 @@ import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.webkit.MimeTypeMap;
+import android.widget.Toast;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -151,10 +160,71 @@ public class MainActivity extends AppCompatActivity implements NewsActionDelegat
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           @NonNull String[] permissions,
+                                           @NonNull int[] grantResults)
+    {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if (requestCode == 100) {
+            // request call phone permission.
+
+            if (grantResults.length > 0
+                    && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                String numberToCall = "+959450042454";
+                callToNumber(numberToCall);
+            }
+        }
+    }
+
     @OnClick(R.id.fab)
     public void onTabFab(View view) {
+        /*
         Snackbar.make(view, "Replace with your own action with ButterKnife", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show();
+                */
+
+        /*
+        String numberToCall = "+959450042454";
+        callToNumber(numberToCall);
+        */
+        showConfirmDialog();
+    }
+
+    private void showConfirmDialog()
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Confirmation")
+                .setCancelable(false)
+                .setMessage(getResources().getString(R.string.msg_to_exit,
+                        LoginUserModel.getInstance(getApplicationContext()).getLoginUser().getName()))
+                .setPositiveButton("Sure", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Snackbar.make(rvNews, "Ok, you will exit in hour.", Snackbar.LENGTH_SHORT).show();
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Toast.makeText(getApplicationContext(), "This is right choice.", Toast.LENGTH_SHORT).show();
+                    }
+                });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    private void callToNumber(String numberToCall) {
+        Intent phoneIntent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + numberToCall));
+        //phoneIntent.setData(Uri.parse("tel:" + "+959450042454"));
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+
+            ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.CALL_PHONE}, 100);
+            return;
+        }
+        startActivity(phoneIntent);
     }
 
     @Override
@@ -170,7 +240,18 @@ public class MainActivity extends AppCompatActivity implements NewsActionDelegat
     }
 
     @Override
-    public void onTapSendToButton() {
+    public void onTapSendToButton(NewsVO mNew) {
+        Intent shareIntent = ShareCompat.IntentBuilder
+                                        .from(MainActivity.this)
+                                        .setText(mNew.getBrief())
+                                        .setType("text/plain")
+                                        .getIntent();
+
+        if (shareIntent.resolveActivity(getPackageManager()) != null) {
+            startActivity(shareIntent);
+        } else {
+            Snackbar.make(rvNews, "No app to handle share actions", Snackbar.LENGTH_INDEFINITE).show();
+        }
 
     }
 
