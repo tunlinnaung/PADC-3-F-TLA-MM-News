@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.view.View;
 import android.widget.FrameLayout;
 
 import org.greenrobot.eventbus.EventBus;
@@ -12,6 +13,7 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import xyz.tunlinaung.news.R;
 import xyz.tunlinaung.news.data.models.LoginUserModel;
 import xyz.tunlinaung.news.data.vo.LoginUserVO;
@@ -30,6 +32,8 @@ public class AccountControlViewPod extends FrameLayout {
 
     @BindView(R.id.vp_login_user) LoginUserViewPod vpLoginUser;
 
+    private LoginUserDelegate mLoginUserDelegate;
+
     public AccountControlViewPod(@NonNull Context context) {
         super(context);
     }
@@ -47,6 +51,7 @@ public class AccountControlViewPod extends FrameLayout {
     }
 
     public void setDelegate(LoginUserDelegate mDelegate) {
+        mLoginUserDelegate = mDelegate;
         vpLoginUser.setDelegate(mDelegate);
     }
 
@@ -60,6 +65,11 @@ public class AccountControlViewPod extends FrameLayout {
         EventBus.getDefault().register(this);
 
         refreshUserSession();
+    }
+
+    @OnClick(R.id.vp_login_user)
+    public void onTapLoginUser(View view) {
+        mLoginUserDelegate.onTapLoginUser();
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)

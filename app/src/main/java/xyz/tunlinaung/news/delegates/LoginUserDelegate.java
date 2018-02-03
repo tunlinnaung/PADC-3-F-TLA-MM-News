@@ -6,6 +6,7 @@ package xyz.tunlinaung.news.delegates;
 
 public interface LoginUserDelegate {
 
+    void onTapLoginUser();
     void onTapLogout();
 
 }

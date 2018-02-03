@@ -33,7 +33,7 @@ import xyz.tunlinaung.news.fragments.NewsBySportFragment;
  * Created by eidoshack on 1/7/18.
  */
 
-public class NewsByCategoryActivity extends AppCompatActivity {
+public class NewsByCategoryActivity extends BaseActivity {
 
     @BindView(R.id.toolbar) Toolbar toolbarNewsByCategory;
 

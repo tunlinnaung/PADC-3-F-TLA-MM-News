@@ -45,5 +45,7 @@
     <string name="lbl_logout">Logout</string>
     
     <string name="msg_to_exit"><xliff:g id="name">%1$s</xliff:g>, Are you sure to exit MM-News?</string>
+    <string name="msg_generic_no_data">လက်ရှိ data ပြစရာ မရှိသေးပါ</string>
+    <string name="lbl_refresh">Refresh</string>
 
 </resources>

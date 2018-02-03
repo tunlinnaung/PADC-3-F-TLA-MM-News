@@ -26,7 +26,7 @@ import xyz.tunlinaung.news.data.vo.NewsVO;
  * Created by eidoshack on 12/9/17.
  */
 
-public class NewsDetailsActivity extends AppCompatActivity {
+public class NewsDetailsActivity extends BaseActivity {
 
     @BindView(R.id.toolbar_details) Toolbar toolbar;
 

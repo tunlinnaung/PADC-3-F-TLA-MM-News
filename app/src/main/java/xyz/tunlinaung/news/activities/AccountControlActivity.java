@@ -17,7 +17,8 @@ import xyz.tunlinaung.news.fragments.RegisterFragment;
  * Created by eidoshack on 1/20/18.
  */
 
-public class AccountControlActivity extends AppCompatActivity implements LoginScreenDelegate {
+public class AccountControlActivity extends BaseActivity
+                                    implements LoginScreenDelegate {
 
     public static final String IE_SCREEN_TYPE    = "IE_SCREEN_TYPE";
     public static final int SCREEN_TYPE_LOGIN    = 1;

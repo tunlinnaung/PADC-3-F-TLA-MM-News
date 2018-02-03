@@ -1,6 +1,9 @@
 package xyz.tunlinaung.news.activities;
 
 import android.Manifest;
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -15,6 +18,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ShareCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -25,6 +29,7 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.webkit.MimeTypeMap;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import org.greenrobot.eventbus.EventBus;
@@ -46,8 +51,10 @@ import xyz.tunlinaung.news.delegates.NewsActionDelegate;
 import xyz.tunlinaung.news.events.LoadedNewsEvent;
 import xyz.tunlinaung.news.viewpods.AccountControlViewPod;
 import xyz.tunlinaung.news.viewpods.BeforeLoginViewPod;
+import xyz.tunlinaung.news.viewpods.EmptyViewPod;
 
-public class MainActivity extends AppCompatActivity implements NewsActionDelegate, BeforeLoginDelegate, LoginUserDelegate {
+public class MainActivity extends BaseActivity
+                          implements NewsActionDelegate, BeforeLoginDelegate, LoginUserDelegate {
 
     @BindView(R.id.rv_news) RecyclerView rvNews;
 
@@ -59,9 +66,15 @@ public class MainActivity extends AppCompatActivity implements NewsActionDelegat
 
     @BindView(R.id.navigation_view) NavigationView mNavigationView;
 
+    @BindView(R.id.vp_empty) EmptyViewPod vpEmpty;
+
+    @BindView(R.id.swipe_refresh_layout) SwipeRefreshLayout swipeRefreshLayout;
+
     private NewsAdapter mNewsAdapter;
 
-    AccountControlViewPod vpAccountControl;
+    private AccountControlViewPod vpAccountControl;
+
+    private ProgressDialog mProgressDialog;
 
     public static Intent newIntent(Context context) {
         Intent intent = new Intent(context, MainActivity.class);
@@ -121,7 +134,19 @@ public class MainActivity extends AppCompatActivity implements NewsActionDelegat
         vpAccountControl.setDelegate((BeforeLoginDelegate) this);
         vpAccountControl.setDelegate((LoginUserDelegate) this);
 
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                NewsModel.getObjInstance().loadNews();
+            }
+        });
+
         NewsModel.getObjInstance().loadNews();
+
+        mProgressDialog = new ProgressDialog(this);
+        mProgressDialog.setMessage("Please wait while data is loading");
+        mProgressDialog.show();
+
     }
 
     @Override
@@ -263,7 +288,15 @@ public class MainActivity extends AppCompatActivity implements NewsActionDelegat
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onNewsLoaded(LoadedNewsEvent event) {
         Log.d(MMNewsApp.LOG_TAG, "onNewsLoaded: " + event.getNewsList().size());
-        mNewsAdapter.setNews(event.getNewsList());
+
+        swipeRefreshLayout.setRefreshing(false);
+        mProgressDialog.dismiss();
+
+        if (!event.getNewsList().isEmpty()) {
+            mNewsAdapter.setNews(event.getNewsList());
+
+            vpEmpty.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -279,7 +312,15 @@ public class MainActivity extends AppCompatActivity implements NewsActionDelegat
     }
 
     @Override
+    public void onTapLoginUser() {
+        Intent intent = UserProfileActivity.newIntent(getApplicationContext());
+        startActivity(intent);
+    }
+
+    @Override
     public void onTapLogout() {
         LoginUserModel.getInstance(getApplicationContext()).logout();
     }
+
+
 }
