@@ -9,8 +9,11 @@ import xyz.tunlinaung.news.data.vo.NewsVO;
 public interface NewsActionDelegate {
 
     void onTapNewsItem(NewsVO tappedNew);
+    void onTapSendToButton(NewsVO tappedNew);
     void onTapCommentButton();
-    void onTapSendToButton(NewsVO mNew);
     void onTapFavouriteButton();
+    void onTapLikeUsers(NewsVO tappedNew);
+    void onTapCommentUsers(NewsVO tappedNew);
+    void onTapSendToUsers(NewsVO tappedNew);
 
 }

@@ -48,6 +48,8 @@ import xyz.tunlinaung.news.data.vo.NewsVO;
 import xyz.tunlinaung.news.delegates.BeforeLoginDelegate;
 import xyz.tunlinaung.news.delegates.LoginUserDelegate;
 import xyz.tunlinaung.news.delegates.NewsActionDelegate;
+import xyz.tunlinaung.news.dialogs.AddCommentDialog;
+import xyz.tunlinaung.news.dialogs.LikeUsersDialog;
 import xyz.tunlinaung.news.events.LoadedNewsEvent;
 import xyz.tunlinaung.news.viewpods.AccountControlViewPod;
 import xyz.tunlinaung.news.viewpods.BeforeLoginViewPod;
@@ -261,14 +263,15 @@ public class MainActivity extends BaseActivity
 
     @Override
     public void onTapCommentButton() {
-
+        AddCommentDialog dialog = new AddCommentDialog(this);
+        dialog.show();
     }
 
     @Override
-    public void onTapSendToButton(NewsVO mNew) {
+    public void onTapSendToButton(NewsVO tappedNew) {
         Intent shareIntent = ShareCompat.IntentBuilder
                                         .from(MainActivity.this)
-                                        .setText(mNew.getBrief())
+                                        .setText(tappedNew.getBrief())
                                         .setType("text/plain")
                                         .getIntent();
 
@@ -282,6 +285,22 @@ public class MainActivity extends BaseActivity
 
     @Override
     public void onTapFavouriteButton() {
+
+    }
+
+    @Override
+    public void onTapLikeUsers(NewsVO tappedNew) {
+        LikeUsersDialog likeUsersDialog = new LikeUsersDialog(this, tappedNew.getFavorites());
+        likeUsersDialog.show();
+    }
+
+    @Override
+    public void onTapCommentUsers(NewsVO tappedNew) {
+
+    }
+
+    @Override
+    public void onTapSendToUsers(NewsVO tappedNew) {
 
     }
 

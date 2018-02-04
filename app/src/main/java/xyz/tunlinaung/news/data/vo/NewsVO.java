@@ -2,6 +2,7 @@ package xyz.tunlinaung.news.data.vo;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -41,13 +42,24 @@ public class NewsVO {
 
     public PublicationVO getPublication() { return publication; }
 
-    public List<FavoriteVO> getFavorites() { return favorites; }
+    public List<FavoriteVO> getFavorites() {
+        if (favorites == null) {
+            favorites = new ArrayList<>();
+        }
+        return favorites;
+    }
 
     public List<CommentVO> getComments() {
+        if (comments == null) {
+            comments = new ArrayList<>();
+        }
         return comments;
     }
 
     public List<SendToVO> getSendTos() {
+        if (sendTos == null) {
+            sendTos = new ArrayList<>();
+        }
         return sendTos;
     }
 }

@@ -48,4 +48,8 @@
     <string name="msg_generic_no_data">လက်ရှိ data ပြစရာ မရှိသေးပါ</string>
     <string name="lbl_refresh">Refresh</string>
 
+    <string name="format_likes_users"><xliff:g id="no_of_likes">%1$d</xliff:g> Likes</string>
+    <string name="format_comments_users"> - <xliff:g id="no_of_comments">%1$d</xliff:g> Comments</string>
+    <string name="format_send_tos_users"> - <xliff:g id="no_of_send_tos">%1$d</xliff:g> Send Tos</string>
+
 </resources>

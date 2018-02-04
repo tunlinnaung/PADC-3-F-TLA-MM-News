@@ -81,30 +81,62 @@
             android:layout_marginTop="14dp"
             android:src="@drawable/coutinho" />
 
-        <TextView
-            android:id="@+id/lbl_news_satisfaction"
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:id="@+id/ll_news_satistics"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:orientation="horizontal"
             android:layout_below="@id/iv_publication_image"
-            android:text="3 Likes - 3 Comments - Sent to 6 people"
-            android:textColor="@color/primary"
-            android:padding="8dp"
-            android:layout_marginLeft="8dp"
-            />
+            android:padding="@dimen/margin_medium"
+            android:layout_marginLeft="@dimen/margin_medium">
+
+            <TextView
+                android:id="@+id/tv_likes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="4 Likes"
+                android:textColor="@color/primary"
+                android:foreground="@drawable/ripple_primary"
+                android:padding="@dimen/margin_small"
+                />
+
+            <TextView
+                android:id="@+id/tv_comments"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="5 Comments"
+                android:textColor="@color/primary"
+                android:foreground="@drawable/ripple_primary"
+                android:padding="@dimen/margin_small"
+                />
+
+            <TextView
+                android:id="@+id/tv_send_tos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sent to 3 people"
+                android:textColor="@color/primary"
+                android:foreground="@drawable/ripple_primary"
+                android:padding="@dimen/margin_small"
+                />
+
+        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/ll_user_action"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_below="@id/lbl_news_satisfaction"
+            android:layout_below="@id/ll_news_satistics"
             android:padding="8dp"
             android:weightSum="2">
 
             <FrameLayout
+                android:id="@+id/fl_comment"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:foreground="@drawable/ripple_primary">
 
                 <TextView
                     android:id="@+id/btn_comment"

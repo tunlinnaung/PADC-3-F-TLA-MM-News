@@ -91,6 +91,21 @@ public class NewsByCategoryFragment extends Fragment implements NewsActionDelega
 
     }
 
+    @Override
+    public void onTapLikeUsers(NewsVO tappedNew) {
+
+    }
+
+    @Override
+    public void onTapCommentUsers(NewsVO tappedNew) {
+
+    }
+
+    @Override
+    public void onTapSendToUsers(NewsVO tappedNew) {
+
+    }
+
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onNewsLoaded(LoadedNewsEvent event) {
         Log.d(MMNewsApp.LOG_TAG, "onNewsLoaded: " + event.getNewsList().size());
