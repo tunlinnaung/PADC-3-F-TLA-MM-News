@@ -14,7 +14,7 @@ public class CommentVO {
     @SerializedName("comment-date")
     private String commentDate;
     @SerializedName("acted-user")
-    private ActedUserVO actedUsers;
+    private ActedUserVO actedUser;
 
     public String getCommentId() {
         return commentId;
@@ -28,7 +28,7 @@ public class CommentVO {
         return commentDate;
     }
 
-    public ActedUserVO getActedUsers() {
-        return actedUsers;
+    public ActedUserVO getActedUser() {
+        return actedUser;
     }
 }

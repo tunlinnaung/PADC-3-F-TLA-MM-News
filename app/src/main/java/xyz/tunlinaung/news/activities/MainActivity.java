@@ -49,7 +49,9 @@ import xyz.tunlinaung.news.delegates.BeforeLoginDelegate;
 import xyz.tunlinaung.news.delegates.LoginUserDelegate;
 import xyz.tunlinaung.news.delegates.NewsActionDelegate;
 import xyz.tunlinaung.news.dialogs.AddCommentDialog;
+import xyz.tunlinaung.news.dialogs.CommentUsersDialog;
 import xyz.tunlinaung.news.dialogs.LikeUsersDialog;
+import xyz.tunlinaung.news.dialogs.SendTosUserDialog;
 import xyz.tunlinaung.news.events.LoadedNewsEvent;
 import xyz.tunlinaung.news.viewpods.AccountControlViewPod;
 import xyz.tunlinaung.news.viewpods.BeforeLoginViewPod;
@@ -296,12 +298,14 @@ public class MainActivity extends BaseActivity
 
     @Override
     public void onTapCommentUsers(NewsVO tappedNew) {
-
+        CommentUsersDialog commentUsersDialog = new CommentUsersDialog(this, tappedNew.getComments());
+        commentUsersDialog.show();
     }
 
     @Override
     public void onTapSendToUsers(NewsVO tappedNew) {
-
+        SendTosUserDialog sendTosUserDialog = new SendTosUserDialog(this, tappedNew.getSendTos());
+        sendTosUserDialog.show();
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
