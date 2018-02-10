@@ -36,6 +36,8 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.util.Date;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -53,6 +55,7 @@ import xyz.tunlinaung.news.dialogs.CommentUsersDialog;
 import xyz.tunlinaung.news.dialogs.LikeUsersDialog;
 import xyz.tunlinaung.news.dialogs.SendTosUserDialog;
 import xyz.tunlinaung.news.events.LoadedNewsEvent;
+import xyz.tunlinaung.news.services.SampleService;
 import xyz.tunlinaung.news.viewpods.AccountControlViewPod;
 import xyz.tunlinaung.news.viewpods.BeforeLoginViewPod;
 import xyz.tunlinaung.news.viewpods.EmptyViewPod;
@@ -219,7 +222,9 @@ public class MainActivity extends BaseActivity
         String numberToCall = "+959450042454";
         callToNumber(numberToCall);
         */
-        showConfirmDialog();
+        //showConfirmDialog();
+        startServiceComponent();
+
     }
 
     private void showConfirmDialog()
@@ -287,7 +292,7 @@ public class MainActivity extends BaseActivity
 
     @Override
     public void onTapFavouriteButton() {
-
+        startServiceComponent();
     }
 
     @Override
@@ -345,5 +350,17 @@ public class MainActivity extends BaseActivity
         LoginUserModel.getInstance(getApplicationContext()).logout();
     }
 
+    private void startServiceComponent() {
+
+        Intent intent = SampleService.newIntent(getApplicationContext(),
+                                                new Date().toString());
+        startService(intent);
+
+        /*
+            Intent intent = new Intent(getApplicationContext(), SampleService.class);
+            intent.putExtra("timestamp", new Date().toString());
+            startService(intent);
+        */
+    }
 
 }

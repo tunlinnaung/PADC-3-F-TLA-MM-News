@@ -1,5 +1,7 @@
 apply plugin: 'com.android.application'
 
+apply plugin: 'com.google.gms.google-services'
+
 android {
     compileSdkVersion 27
     defaultConfig {
@@ -39,4 +41,7 @@ dependencies {
     compile 'com.squareup.retrofit2:converter-gson:2.3.0'
 
     implementation 'net.aungpyaephyo:mmtextview:1.1'
+
+    compile 'com.google.firebase:firebase-core:11.4.2'
+    compile 'com.google.android.gms:play-services-auth:11.4.2'
 }

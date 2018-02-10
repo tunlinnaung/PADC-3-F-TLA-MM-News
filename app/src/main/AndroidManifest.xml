@@ -33,8 +33,7 @@
 
         <!-- TabLayout Activity -->
         <activity android:name=".activities.NewsByCategoryActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-            />
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <activity android:name=".activities.AccountControlActivity"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -42,9 +41,11 @@
         <activity android:name=".activities.UserProfileActivity"
             android:theme="@style/AppTheme.NoActionBar" />
 
+        <service android:name=".services.SampleService" />
+
     </application>
 
-    <!-- access network granted. -->
+    <!-- ASK FOR PERMISSION. -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
 

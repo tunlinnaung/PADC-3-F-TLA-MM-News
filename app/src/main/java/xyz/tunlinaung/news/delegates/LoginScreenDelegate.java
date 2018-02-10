@@ -11,4 +11,10 @@ public interface LoginScreenDelegate {
      */
     void onTapToRegister();
 
+
+    /**
+     * To be able to login via google authentication.
+     */
+    void onTapLoginWithGoogle();
+
 }
